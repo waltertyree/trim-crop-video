@@ -126,18 +126,30 @@ class ViewController: UIViewController {
     })
 
     }
+  fileprivate func calculateFilterIntensity(_ duration: CMTime, _ currentTime: CMTime) -> Float {
+    let timeDiff = CMTimeGetSeconds(CMTimeSubtract(duration, currentTime))
+    if timeDiff < 5 {
+    return Float((5 - timeDiff) / 5.0)
+    }
+    return 0.0
+  }
+
   func transformVideo(item: AVPlayerItem, cropRect: CGRect) {
 
-    let cropScaleComposition = AVMutableVideoComposition(asset: item.asset, applyingCIFiltersWithHandler: { request in
-      guard let cropFilter = CIFilter(name: "CICrop") else { return }
-      cropFilter.setValue(request.sourceImage.clamped(to:request.sourceImage.extent), forKey: kCIInputImageKey)
-      cropFilter.setValue(CIVector(cgRect: cropRect), forKey: "inputRectangle")
+    let cropScaleComposition = AVMutableVideoComposition(asset: item.asset, applyingCIFiltersWithHandler: { [weak self] request in
+
+      guard let self = self else { return }
+
+      let sepiaToneFilter = CIFilter.sepiaTone()
       let currentTime = request.compositionTime
-      let stretchCropFilter = CIFilter.stretchCrop()
-      stretchCropFilter.inputImage = cropFilter.outputImage
-      stretchCropFilter.centerStretchAmount = 1
-      stretchCropFilter.size = CGPoint(x: request.renderSize.width, y: request.renderSize.width)
-      //let finalFilteredImage = stretchCropFilter.outputImage!
+      sepiaToneFilter.intensity = self.calculateFilterIntensity(self.endTime, currentTime)
+      sepiaToneFilter.inputImage = request.sourceImage
+
+      let cropFilter = CIFilter(name: "CICrop") ?? CIFilter()
+      cropFilter.setValue(sepiaToneFilter.outputImage!, forKey: kCIInputImageKey)
+      cropFilter.setValue(CIVector(cgRect: cropRect), forKey: "inputRectangle")
+
+
       let finalFilteredImage = cropFilter.outputImage!.transformed(by: CGAffineTransform(translationX: -cropRect.origin.x, y: -cropRect.origin.y))
       request.finish(with: finalFilteredImage, context: nil)
     })
