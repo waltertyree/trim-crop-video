@@ -44,6 +44,14 @@ class ViewController: UIViewController {
     self.player?.seek(to: self.endTime)
   }
 
+  @IBAction func croppingViewZoom(_ sender: UIPinchGestureRecognizer) {
+    let touch = sender.location(in: sender.view?.superview)
+
+    if sender.numberOfTouches < 2 { return }
+    self.croppingView.transform = CGAffineTransform(scaleX: sender.scale, y: sender.scale)
+    self.croppingView.center = CGPoint(x: touch.x, y: touch.y)
+
+  }
   @IBAction func croppingViewDrag(_ sender: UIPanGestureRecognizer) {
     let touch = sender.location(in: sender.view?.superview)
 

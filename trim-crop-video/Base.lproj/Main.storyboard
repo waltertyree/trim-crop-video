@@ -22,6 +22,16 @@
                                 <rect key="frame" x="20" y="75" width="374" height="640.5"/>
                                 <color key="backgroundColor" systemColor="systemTealColor"/>
                             </containerView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jpW-fA-WKD">
+                                <rect key="frame" x="87" y="299" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="CYu-mp-fVJ" appends="YES" id="TSo-Hu-Psl"/>
+                                    <outletCollection property="gestureRecognizers" destination="KDT-3D-YpD" appends="YES" id="KfU-kS-RgB"/>
+                                </connections>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="1" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8a0-FQ-UYf" userLabel="Buttons Stack">
                                 <rect key="frame" x="20" y="808" width="374" height="30"/>
                                 <subviews>
@@ -41,15 +51,6 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jpW-fA-WKD">
-                                <rect key="frame" x="87" y="299" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="CYu-mp-fVJ" appends="YES" id="TSo-Hu-Psl"/>
-                                </connections>
-                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="PAh-gq-wdL" userLabel="Start Time Stack">
                                 <rect key="frame" x="20" y="724" width="374" height="30"/>
                                 <subviews>
@@ -121,6 +122,11 @@
                         <action selector="croppingViewDrag:" destination="BYZ-38-t0r" id="l27-Tl-Cbg"/>
                     </connections>
                 </panGestureRecognizer>
+                <pinchGestureRecognizer id="KDT-3D-YpD">
+                    <connections>
+                        <action selector="croppingViewZoom:" destination="BYZ-38-t0r" id="ZfT-MU-B6K"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-7.2463768115942031" y="88.392857142857139"/>
         </scene>
