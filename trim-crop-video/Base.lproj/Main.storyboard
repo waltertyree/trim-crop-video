@@ -1,24 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="trim_crop_video" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYL-eD-6LE">
+                                <rect key="frame" x="20" y="75" width="374" height="640.5"/>
+                                <color key="backgroundColor" systemColor="systemTealColor"/>
+                            </containerView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="1" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8a0-FQ-UYf" userLabel="Buttons Stack">
+                                <rect key="frame" x="20" y="808" width="374" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRU-Ox-wu9">
+                                        <rect key="frame" x="0.0" y="0.0" width="54" height="30"/>
+                                        <state key="normal" title="Preview"/>
+                                        <connections>
+                                            <action selector="playTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OrY-vt-GHy"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="osv-eu-LY8">
+                                        <rect key="frame" x="328" y="0.0" width="46" height="30"/>
+                                        <state key="normal" title="Export"/>
+                                        <connections>
+                                            <action selector="exportvideo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0iH-ZI-rqt"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jpW-fA-WKD">
+                                <rect key="frame" x="87" y="299" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="CYu-mp-fVJ" appends="YES" id="TSo-Hu-Psl"/>
+                                </connections>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="PAh-gq-wdL" userLabel="Start Time Stack">
+                                <rect key="frame" x="20" y="724" width="374" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Start Time:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KtU-2V-hli">
+                                        <rect key="frame" x="0.0" y="0.0" width="84" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Yon-jE-JCc">
+                                        <rect key="frame" x="90" y="0.0" width="286" height="31"/>
+                                        <color key="minimumTrackTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="maximumTrackTintColor" name="AccentColor"/>
+                                        <connections>
+                                            <action selector="startTimeUpdated:" destination="BYZ-38-t0r" eventType="valueChanged" id="bg6-Aw-ygM"/>
+                                        </connections>
+                                    </slider>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="pEN-yG-3DW" userLabel="End Time Stack">
+                                <rect key="frame" x="20" y="766" width="374" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="End Time:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OwM-bB-Nny">
+                                        <rect key="frame" x="0.0" y="0.0" width="76" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="F2g-1Y-aZ6">
+                                        <rect key="frame" x="82" y="0.0" width="294" height="31"/>
+                                        <connections>
+                                            <action selector="endTimeUpdated:" destination="BYZ-38-t0r" eventType="valueChanged" id="fg9-gC-8xd"/>
+                                        </connections>
+                                    </slider>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="pEN-yG-3DW" firstAttribute="centerX" secondItem="MYL-eD-6LE" secondAttribute="centerX" id="1FC-5v-7rE"/>
+                            <constraint firstItem="8a0-FQ-UYf" firstAttribute="width" secondItem="MYL-eD-6LE" secondAttribute="width" id="57I-7N-l59"/>
+                            <constraint firstItem="pEN-yG-3DW" firstAttribute="top" secondItem="PAh-gq-wdL" secondAttribute="bottom" constant="12" id="FWi-XN-tFL"/>
+                            <constraint firstItem="8a0-FQ-UYf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="HoZ-O7-Bh2"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="8a0-FQ-UYf" secondAttribute="bottom" constant="24" id="Mce-Ok-jbg"/>
+                            <constraint firstItem="PAh-gq-wdL" firstAttribute="firstBaseline" secondItem="MYL-eD-6LE" secondAttribute="baseline" constant="24.5" symbolType="layoutAnchor" id="Q1A-Sb-XFn"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MYL-eD-6LE" secondAttribute="trailing" constant="20" id="Ste-dd-Itr"/>
+                            <constraint firstItem="MYL-eD-6LE" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="31" id="Vb1-Q8-QIF"/>
+                            <constraint firstItem="PAh-gq-wdL" firstAttribute="width" secondItem="MYL-eD-6LE" secondAttribute="width" id="ZWQ-fk-Eec"/>
+                            <constraint firstItem="MYL-eD-6LE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="fuK-Pd-KET"/>
+                            <constraint firstItem="pEN-yG-3DW" firstAttribute="width" secondItem="MYL-eD-6LE" secondAttribute="width" id="p96-EH-Mcd"/>
+                            <constraint firstItem="8a0-FQ-UYf" firstAttribute="top" secondItem="pEN-yG-3DW" secondAttribute="bottom" constant="12" id="qZS-vk-B6H"/>
+                            <constraint firstItem="PAh-gq-wdL" firstAttribute="centerX" secondItem="MYL-eD-6LE" secondAttribute="centerX" id="yJu-7r-TdD"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cropDragging" destination="CYu-mp-fVJ" id="MN7-CQ-vhP"/>
+                        <outlet property="croppingView" destination="jpW-fA-WKD" id="9mE-yw-OGb"/>
+                        <outlet property="endTimeSlider" destination="F2g-1Y-aZ6" id="B9V-sO-IbL"/>
+                        <outlet property="playButton" destination="gRU-Ox-wu9" id="rd9-WK-TM9"/>
+                        <outlet property="playerView" destination="MYL-eD-6LE" id="sLF-gm-N3U"/>
+                        <outlet property="startTimeSlider" destination="Yon-jE-JCc" id="Csc-kO-tBX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="CYu-mp-fVJ">
+                    <scrollTypes key="allowedScrollTypesMask" continuous="YES"/>
+                    <connections>
+                        <action selector="croppingViewDrag:" destination="BYZ-38-t0r" id="l27-Tl-Cbg"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
+            <point key="canvasLocation" x="-7.2463768115942031" y="88.392857142857139"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

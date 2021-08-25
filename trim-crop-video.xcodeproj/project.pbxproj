@@ -13,6 +13,8 @@
 		D470EC5726D596EA00E9C676 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D470EC5526D596EA00E9C676 /* Main.storyboard */; };
 		D470EC5926D596EB00E9C676 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D470EC5826D596EB00E9C676 /* Assets.xcassets */; };
 		D470EC5C26D596EB00E9C676 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D470EC5A26D596EB00E9C676 /* LaunchScreen.storyboard */; };
+		D470EC6426D596F900E9C676 /* grocery-train.mov in Resources */ = {isa = PBXBuildFile; fileRef = D470EC6326D596F900E9C676 /* grocery-train.mov */; };
+		D470EC6626D59AE600E9C676 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D470EC6526D59AE600E9C676 /* PlayerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		D470EC5826D596EB00E9C676 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D470EC5B26D596EB00E9C676 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D470EC5D26D596EB00E9C676 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D470EC6326D596F900E9C676 /* grocery-train.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "grocery-train.mov"; sourceTree = "<group>"; };
+		D470EC6526D59AE600E9C676 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,10 +61,12 @@
 			isa = PBXGroup;
 			children = (
 				D470EC4F26D596EA00E9C676 /* AppDelegate.swift */,
+				D470EC6526D59AE600E9C676 /* PlayerViewController.swift */,
 				D470EC5126D596EA00E9C676 /* SceneDelegate.swift */,
 				D470EC5326D596EA00E9C676 /* ViewController.swift */,
 				D470EC5526D596EA00E9C676 /* Main.storyboard */,
 				D470EC5826D596EB00E9C676 /* Assets.xcassets */,
+				D470EC6326D596F900E9C676 /* grocery-train.mov */,
 				D470EC5A26D596EB00E9C676 /* LaunchScreen.storyboard */,
 				D470EC5D26D596EB00E9C676 /* Info.plist */,
 			);
@@ -127,6 +133,7 @@
 				D470EC5C26D596EB00E9C676 /* LaunchScreen.storyboard in Resources */,
 				D470EC5926D596EB00E9C676 /* Assets.xcassets in Resources */,
 				D470EC5726D596EA00E9C676 /* Main.storyboard in Resources */,
+				D470EC6426D596F900E9C676 /* grocery-train.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D470EC5426D596EA00E9C676 /* ViewController.swift in Sources */,
+				D470EC6626D59AE600E9C676 /* PlayerViewController.swift in Sources */,
 				D470EC5026D596EA00E9C676 /* AppDelegate.swift in Sources */,
 				D470EC5226D596EA00E9C676 /* SceneDelegate.swift in Sources */,
 			);
