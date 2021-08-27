@@ -2,7 +2,6 @@
 //  ViewController.swift
 //  trim-crop-video
 //
-//  Created by Walter Tyree on 8/24/21.
 //
 
 import UIKit
@@ -24,11 +23,26 @@ class ViewController: UIViewController {
 
   @IBOutlet var startTimeSlider: UISlider!
   @IBOutlet var endTimeSlider: UISlider!
+
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view.
-    self.player = AVPlayer(url: Bundle.main.url(forResource: "grocery-train", withExtension: "mov")!)
+    loadCleanVideo()
 
+  }
+
+  override func viewDidAppear(_ animated: Bool) {
+    let playerLayer = AVPlayerLayer(player: player)
+    playerLayer.frame = playerView.layer.bounds
+    playerLayer.videoGravity = .resizeAspect
+
+    playerView.layer.addSublayer(playerLayer)
+
+    self.croppingView.frame = CGRect(x: 0, y: 0, width: 250, height: 250)
+    self.croppingView.center = playerView.center
+    self.croppingView.layer.borderWidth = 2
+    self.croppingView.layer.borderColor = UIColor.red.cgColor
+    self.playerView.addSubview(self.croppingView)
   }
 
   @IBAction func startTimeUpdated(_ sender: UISlider) {
@@ -58,18 +72,10 @@ class ViewController: UIViewController {
     self.croppingView.center = CGPoint(x: touch.x, y: touch.y)
   }
 
-  override func viewDidAppear(_ animated: Bool) {
-    let playerLayer = AVPlayerLayer(player: player)
-    playerLayer.frame = playerView.layer.bounds
-    playerLayer.videoGravity = .resizeAspect
 
-    playerView.layer.addSublayer(playerLayer)
 
-    self.croppingView.frame = CGRect(x: 0, y: 0, width: 250, height: 250)
-    self.croppingView.center = playerView.center
-    self.croppingView.layer.borderWidth = 2
-    self.croppingView.layer.borderColor = UIColor.red.cgColor
-    self.playerView.addSubview(self.croppingView)
+  fileprivate func loadCleanVideo() {
+    self.player = AVPlayer(url: Bundle.main.url(forResource: "grocery-train", withExtension: "mov")!)
   }
 
   func prepareForCropping() {
@@ -89,6 +95,14 @@ class ViewController: UIViewController {
     self.transformVideo(item: playerItem, cropRect: cropRect)
 
   }
+
+  @IBAction func resetTapped(_ sender: Any) {
+    self.croppingView.isHidden = false
+    self.startTimeSlider.setValue(0, animated: true)
+    self.endTimeSlider.setValue(1, animated: true)
+    self.loadCleanVideo()
+  }
+
   @IBAction func playTapped(_ sender: UIButton) {
     self.croppingView.isHidden = true
     self.prepareForCropping()
@@ -112,7 +126,7 @@ class ViewController: UIViewController {
 
     //delete any old file
     do {
-    try FileManager.default.removeItem(at: outputMovieURL)
+      try FileManager.default.removeItem(at: outputMovieURL)
     } catch {
       print("Could not remove file \(error.localizedDescription)")
     }
@@ -133,11 +147,11 @@ class ViewController: UIViewController {
 
     })
 
-    }
+  }
   fileprivate func calculateFilterIntensity(_ duration: CMTime, _ currentTime: CMTime) -> Float {
     let timeDiff = CMTimeGetSeconds(CMTimeSubtract(duration, currentTime))
     if timeDiff < 5 {
-    return Float((5 - timeDiff) / 5.0)
+      return Float((5 - timeDiff) / 5.0)
     }
     return 0.0
   }

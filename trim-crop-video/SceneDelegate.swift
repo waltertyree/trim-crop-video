@@ -2,7 +2,6 @@
 //  SceneDelegate.swift
 //  trim-crop-video
 //
-//  Created by Walter Tyree on 8/24/21.
 //
 
 import UIKit

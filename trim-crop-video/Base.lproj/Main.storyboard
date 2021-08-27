@@ -42,6 +42,13 @@
                                             <action selector="playTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OrY-vt-GHy"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qNB-yf-dGf">
+                                        <rect key="frame" x="171.5" y="0.0" width="39" height="30"/>
+                                        <state key="normal" title="Reset"/>
+                                        <connections>
+                                            <action selector="resetTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gPs-XG-D4J"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="osv-eu-LY8">
                                         <rect key="frame" x="328" y="0.0" width="46" height="30"/>
                                         <state key="normal" title="Export"/>
@@ -62,8 +69,9 @@
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Yon-jE-JCc">
                                         <rect key="frame" x="90" y="0.0" width="286" height="31"/>
-                                        <color key="minimumTrackTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="minimumTrackTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="maximumTrackTintColor" name="AccentColor"/>
+                                        <color key="thumbTintColor" name="AccentColor"/>
                                         <connections>
                                             <action selector="startTimeUpdated:" destination="BYZ-38-t0r" eventType="valueChanged" id="bg6-Aw-ygM"/>
                                         </connections>
@@ -81,6 +89,9 @@
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="F2g-1Y-aZ6">
                                         <rect key="frame" x="82" y="0.0" width="294" height="31"/>
+                                        <color key="minimumTrackTintColor" name="AccentColor"/>
+                                        <color key="maximumTrackTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="thumbTintColor" name="AccentColor"/>
                                         <connections>
                                             <action selector="endTimeUpdated:" destination="BYZ-38-t0r" eventType="valueChanged" id="fg9-gC-8xd"/>
                                         </connections>
@@ -133,7 +144,7 @@
     </scenes>
     <resources>
         <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.74299997091293335" green="0.30199998617172241" blue="0.0" alpha="0.79100000858306885" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
