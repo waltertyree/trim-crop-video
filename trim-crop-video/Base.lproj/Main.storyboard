@@ -118,7 +118,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="cropDragging" destination="CYu-mp-fVJ" id="MN7-CQ-vhP"/>
                         <outlet property="croppingView" destination="jpW-fA-WKD" id="9mE-yw-OGb"/>
                         <outlet property="endTimeSlider" destination="F2g-1Y-aZ6" id="B9V-sO-IbL"/>
                         <outlet property="exportButton" destination="osv-eu-LY8" id="2no-av-ud7"/>

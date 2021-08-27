@@ -11,7 +11,6 @@ import CoreImage.CIFilterBuiltins
 
 class ViewController: UIViewController {
 
-  @IBOutlet var cropDragging: UIPanGestureRecognizer!
   @IBOutlet var croppingView: UIView!
   @IBOutlet var playButton: UIButton!
   @IBOutlet var resetButton: UIButton!
@@ -35,15 +34,9 @@ class ViewController: UIViewController {
   @IBOutlet var startTimeSlider: UISlider!
   @IBOutlet var endTimeSlider: UISlider!
 
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     loadCleanVideo()
-
-  }
-
-  override func viewDidAppear(_ animated: Bool) {
-
   }
 
   @IBAction func startTimeUpdated(_ sender: UISlider) {
@@ -51,7 +44,6 @@ class ViewController: UIViewController {
     self.startTime = CMTimeMakeWithSeconds(Double(sender.value) * videoDuration.seconds, preferredTimescale: 600)
     self.player?.seek(to: self.startTime)
   }
-
 
   @IBAction func endTimeUpdated(_ sender: UISlider) {
     guard let videoDuration = self.player?.currentItem?.duration else { return }
@@ -100,19 +92,22 @@ class ViewController: UIViewController {
   func prepareForCropping() {
     guard let playerItem = self.player?.currentItem else { return }
     let renderingSize = playerItem.presentationSize
+
     let xFactor = renderingSize.width / playerView.bounds.size.width
     let yFactor = renderingSize.height / playerView.bounds.size.height
+
     let newX = croppingView.frame.origin.x * xFactor
     let newW = croppingView.frame.width * xFactor
     let newY = croppingView.frame.origin.y * yFactor
     let newH = croppingView.frame.height * yFactor
     var cropRect = CGRect(x: newX, y: newY, width: newW, height: newH)
+
     let originFlipTransform = CGAffineTransform(scaleX: 1, y: -1)
     let frameTranslateTransform = CGAffineTransform(translationX: 0, y: renderingSize.height)
     cropRect = cropRect.applying(originFlipTransform)
     cropRect = cropRect.applying(frameTranslateTransform)
-    self.transformVideo(item: playerItem, cropRect: cropRect)
 
+    self.transformVideo(item: playerItem, cropRect: cropRect)
   }
 
   @IBAction func resetTapped(_ sender: Any) {
@@ -135,8 +130,6 @@ class ViewController: UIViewController {
       guard let self = self else { return }
       self.player?.pause()
       self.player?.removeTimeObserver(self.endTimeObserver!)
-      guard let playerItem = self.player?.currentItem else { return }
-      playerItem.videoComposition = nil
       self.croppingView.isHidden = false
     })
     player?.play()
