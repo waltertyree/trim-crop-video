@@ -14,9 +14,20 @@ class ViewController: UIViewController {
   @IBOutlet var cropDragging: UIPanGestureRecognizer!
   @IBOutlet var croppingView: UIView!
   @IBOutlet var playButton: UIButton!
+  @IBOutlet var resetButton: UIButton!
+  @IBOutlet var exportButton: UIButton!
   @IBOutlet var playerView: UIView!
-  var player: AVPlayer?
-  var cropScaleComposition: AVVideoComposition?
+  var player: AVPlayer? {
+    didSet {
+      guard let duration = player?.currentItem?.duration else { return }
+      endTime = duration
+    }
+  }
+  var cropScaleComposition: AVVideoComposition? {
+    didSet {
+      self.exportButton.isEnabled = (cropScaleComposition != nil)
+    }
+  }
   var startTime: CMTime = .zero
   var endTime: CMTime = .zero
   var endTimeObserver: Any?
@@ -32,17 +43,7 @@ class ViewController: UIViewController {
   }
 
   override func viewDidAppear(_ animated: Bool) {
-    let playerLayer = AVPlayerLayer(player: player)
-    playerLayer.frame = playerView.layer.bounds
-    playerLayer.videoGravity = .resizeAspect
 
-    playerView.layer.addSublayer(playerLayer)
-
-    self.croppingView.frame = CGRect(x: 0, y: 0, width: 250, height: 250)
-    self.croppingView.center = playerView.center
-    self.croppingView.layer.borderWidth = 2
-    self.croppingView.layer.borderColor = UIColor.red.cgColor
-    self.playerView.addSubview(self.croppingView)
   }
 
   @IBAction func startTimeUpdated(_ sender: UISlider) {
@@ -74,8 +75,26 @@ class ViewController: UIViewController {
 
 
 
+  fileprivate func configureCroppingView() {
+    self.croppingView.frame = CGRect(x: 0, y: 0, width: 250, height: 250)
+    self.croppingView.center = playerView.center
+    self.croppingView.layer.borderWidth = 2
+    self.croppingView.layer.borderColor = UIColor.red.cgColor
+  }
+
   fileprivate func loadCleanVideo() {
     self.player = AVPlayer(url: Bundle.main.url(forResource: "grocery-train", withExtension: "mov")!)
+    self.cropScaleComposition = nil
+
+    let playerLayer = AVPlayerLayer(player: player)
+    playerLayer.frame = playerView.layer.bounds
+    playerLayer.videoGravity = .resizeAspect
+
+    playerView.layer.addSublayer(playerLayer)
+
+    configureCroppingView()
+
+    self.playerView.addSubview(self.croppingView)
   }
 
   func prepareForCropping() {
@@ -98,8 +117,12 @@ class ViewController: UIViewController {
 
   @IBAction func resetTapped(_ sender: Any) {
     self.croppingView.isHidden = false
+    self.croppingView.removeFromSuperview()
+
     self.startTimeSlider.setValue(0, animated: true)
     self.endTimeSlider.setValue(1, animated: true)
+
+    self.playerView.layer.sublayers?.removeAll()
     self.loadCleanVideo()
   }
 
@@ -119,10 +142,40 @@ class ViewController: UIViewController {
     player?.play()
   }
 
+  fileprivate func addSpinner() {
+    //Disable controls because this is a long process
+    let spinner = UIActivityIndicatorView(style: .large)
+    spinner.backgroundColor = .white
+    spinner.tag = 10
+    self.playerView.addSubview(spinner)
+    spinner.center = self.playerView.center
+    spinner.startAnimating()
+  }
+
+  fileprivate func removeSpinner() {
+    let spinner = self.playerView.viewWithTag(10)
+    spinner?.removeFromSuperview()
+  }
+
+  fileprivate func updateControlStatus(enabled: Bool) {
+    if !enabled {
+    addSpinner()
+    } else {
+      removeSpinner()
+    }
+    self.playButton.isEnabled = enabled
+    self.startTimeSlider.isEnabled = enabled
+    self.endTimeSlider.isEnabled = enabled
+    self.resetButton.isEnabled = enabled
+    self.exportButton.isEnabled = enabled
+  }
+
   @IBAction func exportvideo(_ sender: UIButton) {
     guard let assetToExport = self.player?.currentItem?.asset else { return }
     guard let composition = self.cropScaleComposition else { return }
     guard let outputMovieURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("exported.mov") else { return }
+
+    updateControlStatus(enabled: false)
 
     //delete any old file
     do {
@@ -181,6 +234,8 @@ class ViewController: UIViewController {
   }
 
   func shareVideoFile(_ file:URL) {
+
+    updateControlStatus(enabled: true)
 
     // Create the Array which includes the files you want to share
     var filesToShare = [Any]()

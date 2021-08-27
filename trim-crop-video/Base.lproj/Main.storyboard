@@ -49,7 +49,7 @@
                                             <action selector="resetTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gPs-XG-D4J"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="osv-eu-LY8">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="osv-eu-LY8">
                                         <rect key="frame" x="328" y="0.0" width="46" height="30"/>
                                         <state key="normal" title="Export"/>
                                         <connections>
@@ -121,8 +121,10 @@
                         <outlet property="cropDragging" destination="CYu-mp-fVJ" id="MN7-CQ-vhP"/>
                         <outlet property="croppingView" destination="jpW-fA-WKD" id="9mE-yw-OGb"/>
                         <outlet property="endTimeSlider" destination="F2g-1Y-aZ6" id="B9V-sO-IbL"/>
+                        <outlet property="exportButton" destination="osv-eu-LY8" id="2no-av-ud7"/>
                         <outlet property="playButton" destination="gRU-Ox-wu9" id="rd9-WK-TM9"/>
                         <outlet property="playerView" destination="MYL-eD-6LE" id="sLF-gm-N3U"/>
+                        <outlet property="resetButton" destination="qNB-yf-dGf" id="S3P-GA-9je"/>
                         <outlet property="startTimeSlider" destination="Yon-jE-JCc" id="Csc-kO-tBX"/>
                     </connections>
                 </viewController>
