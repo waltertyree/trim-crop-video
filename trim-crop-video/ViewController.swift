@@ -194,6 +194,7 @@ class ViewController: UIViewController {
     })
 
   }
+
   fileprivate func calculateFilterIntensity(_ duration: CMTime, _ currentTime: CMTime) -> Float {
     let timeDiff = CMTimeGetSeconds(CMTimeSubtract(duration, currentTime))
     if timeDiff < 5 {
