@@ -170,31 +170,44 @@ class ViewController: UIViewController {
 
     updateControlStatus(enabled: false)
 
+    export(assetToExport, to: outputMovieURL, startTime: self.startTime, endTime: self.endTime, composition: composition)
+
+
+  }
+
+  func export(_ asset: AVAsset, to outputMovieURL: URL, startTime: CMTime, endTime: CMTime, composition: AVVideoComposition) {
+
+    //Create trim range
+    let timeRange = CMTimeRangeFromTimeToTime(start: startTime, end: endTime)
+
     //delete any old file
     do {
       try FileManager.default.removeItem(at: outputMovieURL)
     } catch {
       print("Could not remove file \(error.localizedDescription)")
     }
-    let exporter = AVAssetExportSession(asset: assetToExport, presetName: AVAssetExportPresetHighestQuality)
+
+    //create exporter
+    let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetHighestQuality)
+
+    //configure exporter
     exporter?.videoComposition = composition
     exporter?.outputURL = outputMovieURL
     exporter?.outputFileType=AVFileType.mov
-    let exportTimeRange = CMTimeRangeFromTimeToTime(start: self.startTime, end: self.endTime)
-    exporter?.timeRange = exportTimeRange
+    exporter?.timeRange = timeRange
+
+    //export!
     exporter?.exportAsynchronously(completionHandler: { [weak exporter] in
       DispatchQueue.main.async {
         if let error = exporter?.error {
           print("failed \(error.localizedDescription)")
         } else {
-          self.shareVideoFile(outputMovieURL)
+          print("Video saved to \(outputMovieURL)")
         }
       }
 
     })
-
   }
-
   fileprivate func calculateFilterIntensity(_ duration: CMTime, _ currentTime: CMTime) -> Float {
     let timeDiff = CMTimeGetSeconds(CMTimeSubtract(duration, currentTime))
     if timeDiff < 5 {
@@ -205,26 +218,18 @@ class ViewController: UIViewController {
 
   func transformVideo(item: AVPlayerItem, cropRect: CGRect) {
 
-    let cropScaleComposition = AVMutableVideoComposition(asset: item.asset, applyingCIFiltersWithHandler: { [weak self] request in
+    let cropScaleComposition = AVMutableVideoComposition(asset: item.asset, applyingCIFiltersWithHandler: {request in
 
-      guard let self = self else { return }
-
-      let sepiaToneFilter = CIFilter.sepiaTone()
-      let currentTime = request.compositionTime
-      sepiaToneFilter.intensity = self.calculateFilterIntensity(self.endTime, currentTime)
-      sepiaToneFilter.inputImage = request.sourceImage
-
-      let cropFilter = CIFilter(name: "CICrop") ?? CIFilter()
-      cropFilter.setValue(sepiaToneFilter.outputImage!, forKey: kCIInputImageKey)
+      let cropFilter = CIFilter(name: "CICrop")!
+      cropFilter.setValue(request.sourceImage, forKey: kCIInputImageKey)
       cropFilter.setValue(CIVector(cgRect: cropRect), forKey: "inputRectangle")
 
 
-      let finalFilteredImage = cropFilter.outputImage!.transformed(by: CGAffineTransform(translationX: -cropRect.origin.x, y: -cropRect.origin.y))
-      request.finish(with: finalFilteredImage, context: nil)
+      let imageAtOrigin = cropFilter.outputImage!.transformed(by: CGAffineTransform(translationX: -cropRect.origin.x, y: -cropRect.origin.y))
+      request.finish(with: imageAtOrigin, context: nil)
     })
     cropScaleComposition.renderSize = cropRect.size
     item.videoComposition = cropScaleComposition
-    self.cropScaleComposition = cropScaleComposition
   }
 
   func shareVideoFile(_ file:URL) {
