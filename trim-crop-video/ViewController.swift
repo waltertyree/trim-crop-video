@@ -193,7 +193,7 @@ class ViewController: UIViewController {
     //configure exporter
     exporter?.videoComposition = composition
     exporter?.outputURL = outputMovieURL
-    exporter?.outputFileType=AVFileType.mov
+    exporter?.outputFileType = .mov
     exporter?.timeRange = timeRange
 
     //export!
