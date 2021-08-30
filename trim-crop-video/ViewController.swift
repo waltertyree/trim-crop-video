@@ -202,7 +202,7 @@ class ViewController: UIViewController {
         if let error = exporter?.error {
           print("failed \(error.localizedDescription)")
         } else {
-          print("Video saved to \(outputMovieURL)")
+          self.shareVideoFile(outputMovieURL)
         }
       }
 
