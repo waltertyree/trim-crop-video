@@ -27,6 +27,28 @@ class BasicPlayerViewController: AVPlayerViewController, AVPlayerViewControllerD
     item.videoComposition = cropScaleComposition
   }
 
+  fileprivate func boxAndBlur(item: AVPlayerItem) {
+    let cropRect = CGRect(x: 50.0, y: 200.0, width: 600.0, height: 600.0)
+    //Set the start time to 5 seconds.
+    let cropScaleComposition = AVMutableVideoComposition(asset: item.asset, applyingCIFiltersWithHandler: {request in
+
+      let cropFilter = CIFilter(name: "CICrop")!
+      cropFilter.setValue(request.sourceImage, forKey: kCIInputImageKey)
+      cropFilter.setValue(CIVector(cgRect: cropRect), forKey: "inputRectangle")
+
+      let blurFilter = CIFilter.boxBlur()
+      blurFilter.inputImage = request.sourceImage
+      blurFilter.radius = 20.0
+
+      let compostingFilter = CIFilter.sourceAtopCompositing()
+      compostingFilter.backgroundImage = blurFilter.outputImage!.cropped(to: request.sourceImage.extent)
+      compostingFilter.inputImage = cropFilter.outputImage
+
+      request.finish(with: compostingFilter.outputImage!, context: nil)
+    })
+
+    item.videoComposition = cropScaleComposition
+  }
   override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,6 +66,8 @@ class BasicPlayerViewController: AVPlayerViewController, AVPlayerViewControllerD
     trainItem.forwardPlaybackEndTime = CMTimeMakeWithSeconds(itemDuration.seconds - 5, preferredTimescale: 600)
 
     self.cropVideo(item: trainItem)
+
+    //self.boxAndBlur(item: trainItem)
 
     self.player = AVPlayer(playerItem: trainItem)
 
