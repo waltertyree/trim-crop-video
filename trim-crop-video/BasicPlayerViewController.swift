@@ -32,8 +32,15 @@ class BasicPlayerViewController: AVPlayerViewController, AVPlayerViewControllerD
 
     let trainItem = AVPlayerItem(url: Bundle.main.url(forResource: "grocery-train", withExtension: "mov")!)
 
-    trainItem.forwardPlaybackEndTime = CMTimeMakeWithSeconds(10, preferredTimescale: 600)
-    
+
+
+    trainItem.reversePlaybackEndTime = CMTimeMakeWithSeconds(5, preferredTimescale: 600)
+
+    trainItem.seek(to: CMTimeMakeWithSeconds(5, preferredTimescale: 600), completionHandler: nil)
+
+
+    trainItem.forwardPlaybackEndTime = CMTimeMakeWithSeconds(20, preferredTimescale: 600)
+
     self.cropVideo(item: trainItem)
 
     self.player = AVPlayer(playerItem: trainItem)
