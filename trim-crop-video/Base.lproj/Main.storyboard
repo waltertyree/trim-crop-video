@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QC8-fh-peu">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Fancy-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="trim_crop_video" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYL-eD-6LE">
-                                <rect key="frame" x="20" y="75" width="374" height="640.5"/>
+                                <rect key="frame" x="20" y="75" width="374" height="591.5"/>
                                 <color key="backgroundColor" systemColor="systemTealColor"/>
                             </containerView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jpW-fA-WKD">
@@ -33,7 +33,7 @@
                                 </connections>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="1" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8a0-FQ-UYf" userLabel="Buttons Stack">
-                                <rect key="frame" x="20" y="808" width="374" height="30"/>
+                                <rect key="frame" x="20" y="759" width="374" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRU-Ox-wu9">
                                         <rect key="frame" x="0.0" y="0.0" width="54" height="30"/>
@@ -59,7 +59,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="PAh-gq-wdL" userLabel="Start Time Stack">
-                                <rect key="frame" x="20" y="724" width="374" height="30"/>
+                                <rect key="frame" x="20" y="675" width="374" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Start Time:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KtU-2V-hli">
                                         <rect key="frame" x="0.0" y="0.0" width="84" height="30"/>
@@ -79,7 +79,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="pEN-yG-3DW" userLabel="End Time Stack">
-                                <rect key="frame" x="20" y="766" width="374" height="30"/>
+                                <rect key="frame" x="20" y="717" width="374" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="End Time:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OwM-bB-Nny">
                                         <rect key="frame" x="0.0" y="0.0" width="76" height="30"/>
@@ -117,6 +117,7 @@
                             <constraint firstItem="PAh-gq-wdL" firstAttribute="centerX" secondItem="MYL-eD-6LE" secondAttribute="centerX" id="yJu-7r-TdD"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Fancy" image="star" catalog="system" id="JHG-wY-tIj"/>
                     <connections>
                         <outlet property="croppingView" destination="jpW-fA-WKD" id="9mE-yw-OGb"/>
                         <outlet property="endTimeSlider" destination="F2g-1Y-aZ6" id="B9V-sO-IbL"/>
@@ -140,10 +141,40 @@
                     </connections>
                 </pinchGestureRecognizer>
             </objects>
+            <point key="canvasLocation" x="902.89855072463774" y="88.392857142857139"/>
+        </scene>
+        <!--Basic-->
+        <scene sceneID="grA-n6-hMU">
+            <objects>
+                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="ceK-bw-0Zq" customClass="BasicPlayerViewController" customModule="trim_crop_video" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Basic" image="film" catalog="system" id="kU7-Hh-jxB"/>
+                </avPlayerViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mz7-Js-mZV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1573" y="29"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="hnN-UX-fbd">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="QC8-fh-peu" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aqK-Cm-qNJ">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ceK-bw-0Zq" kind="relationship" relationship="viewControllers" id="kAK-9h-m6M"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="dsy-z9-GcA"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rqp-bQ-uSk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
             <point key="canvasLocation" x="-7.2463768115942031" y="88.392857142857139"/>
         </scene>
     </scenes>
     <resources>
+        <image name="film" catalog="system" width="128" height="93"/>
+        <image name="star" catalog="system" width="128" height="116"/>
         <namedColor name="AccentColor">
             <color red="0.74299997091293335" green="0.30199998617172241" blue="0.0" alpha="0.79100000858306885" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
