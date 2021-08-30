@@ -29,9 +29,10 @@ class BasicPlayerViewController: AVPlayerViewController, AVPlayerViewControllerD
 
   override func viewDidLoad() {
         super.viewDidLoad()
-    let trainAsset = AVAsset(url: Bundle.main.url(forResource: "grocery-train", withExtension: "mov")!)
-    let trainItem = AVPlayerItem(asset: trainAsset, automaticallyLoadedAssetKeys: ["duration"])
 
+    let trainAsset = AVAsset(url: Bundle.main.url(forResource: "grocery-train", withExtension: "mov")!)
+
+    let trainItem = AVPlayerItem(asset: trainAsset)
 
 
     trainItem.reversePlaybackEndTime = CMTimeMakeWithSeconds(5, preferredTimescale: 600)
