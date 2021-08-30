@@ -218,10 +218,17 @@ class ViewController: UIViewController {
 
   func transformVideo(item: AVPlayerItem, cropRect: CGRect) {
 
-    let cropScaleComposition = AVMutableVideoComposition(asset: item.asset, applyingCIFiltersWithHandler: {request in
+    let cropScaleComposition = AVMutableVideoComposition(asset: item.asset, applyingCIFiltersWithHandler: { [weak self] request in
+
+      guard let self = self else { return }
+
+      let sepiaToneFilter = CIFilter.sepiaTone()
+      let currentTime = request.compositionTime
+      sepiaToneFilter.intensity = self.calculateFilterIntensity(self.endTime, currentTime)
+      sepiaToneFilter.inputImage = request.sourceImage
 
       let cropFilter = CIFilter(name: "CICrop")!
-      cropFilter.setValue(request.sourceImage, forKey: kCIInputImageKey)
+      cropFilter.setValue(sepiaToneFilter.outputImage!, forKey: kCIInputImageKey)
       cropFilter.setValue(CIVector(cgRect: cropRect), forKey: "inputRectangle")
 
 
@@ -230,6 +237,7 @@ class ViewController: UIViewController {
     })
     cropScaleComposition.renderSize = cropRect.size
     item.videoComposition = cropScaleComposition
+    self.cropScaleComposition = cropScaleComposition
   }
 
   func shareVideoFile(_ file:URL) {
