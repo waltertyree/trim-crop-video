@@ -29,8 +29,8 @@ class BasicPlayerViewController: AVPlayerViewController, AVPlayerViewControllerD
 
   override func viewDidLoad() {
         super.viewDidLoad()
-
-    let trainItem = AVPlayerItem(url: Bundle.main.url(forResource: "grocery-train", withExtension: "mov")!)
+    let trainAsset = AVAsset(url: Bundle.main.url(forResource: "grocery-train", withExtension: "mov")!)
+    let trainItem = AVPlayerItem(asset: trainAsset, automaticallyLoadedAssetKeys: ["duration"])
 
 
 
@@ -38,8 +38,9 @@ class BasicPlayerViewController: AVPlayerViewController, AVPlayerViewControllerD
 
     trainItem.seek(to: CMTimeMakeWithSeconds(5, preferredTimescale: 600), completionHandler: nil)
 
+    let itemDuration = trainAsset.duration
 
-    trainItem.forwardPlaybackEndTime = CMTimeMakeWithSeconds(20, preferredTimescale: 600)
+    trainItem.forwardPlaybackEndTime = CMTimeMakeWithSeconds(itemDuration.seconds - 5, preferredTimescale: 600)
 
     self.cropVideo(item: trainItem)
 
