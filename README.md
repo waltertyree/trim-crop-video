@@ -13,7 +13,7 @@ The `func boxAndBlur(_ item: AVItem)` applies a crop but doesn't shrink the outp
 
 ![crop-blur-example](./readmeimages/box-and-blur-basic.jpg)
 
-##Fancy Tab
+## Fancy Tab
 The second tab of the app uses an `AVPlayer` and an `AVPlayerLayer` to put the video into a regular UIView. When we do this, we have to make our own controls. This view adds a drag and pinch gesture recognizer to the view so we can move a cropping rectangle around.
 
 ![fancy tab example](./readmeimages/fancy-screen.jpg)
